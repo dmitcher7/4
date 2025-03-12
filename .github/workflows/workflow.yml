@@ -36,17 +36,14 @@ jobs:
       - name: Checkout repository code into runner
         uses: actions/checkout@v2
 
-      # Build Docker image
       - name: Build Docker image
-        run: docker build -t python-api-devops:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/python-api-devops:latest .
 
-      # Log in to Docker Hub
       - name: Log in to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      # Push the image to Docker Hub
       - name: Push the image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/python-api-devops:latest
