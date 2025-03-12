@@ -14,11 +14,16 @@ jobs:
       - name: Checkout repository code into runner
         uses: actions/checkout@v2
 
+      # Clear Python cache
+      - name: Clear Python cache
+        run: |
+          rm -rf ${{ github.workspace }}/.cache
+
       # Set up de Python omgeving met versie 3.10
       - name: Set up Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: 3.10
+          python-version: 3.10  # Zorg ervoor dat hier 3.10 wordt gebruikt
 
       # Installeer de afhankelijkheden
       - name: Install dependencies
